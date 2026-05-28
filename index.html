@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Аман & Рамина — 09.08.2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #D4A843;
+    --gold-light: #F0C96A;
+    --rose: #E8617A;
+    --rose-light: #F5A0AE;
+    --cream: #FFF8F0;
+    --deep: #2A1A0E;
+    --accent: #FF6B6B;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    font-family: 'Montserrat', sans-serif;
+    color: var(--deep);
+    overflow-x: hidden;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+    overflow: hidden;
+    background: linear-gradient(160deg, #fff5e6 0%, #ffe8d6 40%, #ffd6e0 100%);
+  }
+
+  .confetti {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .confetti span {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    animation: fall linear infinite;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+
+  .hero-badge {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 24px;
+    animation: fadeDown 1s ease both;
+  }
+
+  .hero-names {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(56px, 12vw, 110px);
+    line-height: 1;
+    color: var(--deep);
+    animation: fadeDown 1s 0.2s ease both;
+  }
+
+  .hero-names .ampersand {
+    color: var(--rose);
+    font-style: italic;
+    display: block;
+    font-size: 0.65em;
+    line-height: 1.2;
+  }
+
+  .hero-divider {
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 28px auto;
+    animation: fadeDown 1s 0.4s ease both;
+  }
+
+  .hero-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 4vw, 34px);
+    font-weight: 300;
+    letter-spacing: 6px;
+    color: var(--deep);
+    animation: fadeDown 1s 0.5s ease both;
+  }
+
+  .hero-place {
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 12px;
+    animation: fadeDown 1s 0.6s ease both;
+  }
+
+  .hero-scroll {
+    margin-top: 48px;
+    animation: bounce 2s infinite, fadeDown 1s 0.8s ease both;
+    color: var(--rose);
+    font-size: 24px;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== FLOWERS DECO ===== */
+  .deco-flower {
+    position: absolute;
+    font-size: 80px;
+    opacity: 0.15;
+    animation: spin 20s linear infinite;
+  }
+  .deco-flower.tl { top: -20px; left: -20px; font-size: 140px; }
+  .deco-flower.br { bottom: -20px; right: -20px; font-size: 140px; animation-direction: reverse; }
+  .deco-flower.tr { top: 30px; right: 10px; font-size: 80px; }
+  .deco-flower.bl { bottom: 30px; left: 10px; font-size: 80px; animation-direction: reverse; }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* ===== COUNTDOWN ===== */
+  .countdown-section {
+    background: linear-gradient(135deg, var(--rose) 0%, #c94a60 100%);
+    padding: 70px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .countdown-section::before {
+    content: '🎉';
+    position: absolute;
+    font-size: 200px;
+    opacity: 0.05;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 40px;
+  }
+
+  .countdown-grid {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .countdown-block {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 24px 20px;
+    min-width: 110px;
+    transition: transform 0.3s;
+  }
+
+  .countdown-block:hover { transform: translateY(-4px); }
+
+  .countdown-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 54px;
+    color: #fff;
+    line-height: 1;
+    display: block;
+  }
+
+  .countdown-unit {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-top: 6px;
+    display: block;
+  }
+
+  /* ===== DETAILS ===== */
+  .details-section {
+    padding: 80px 20px;
+    text-align: center;
+    background: #fff;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 6vw, 52px);
+    color: var(--deep);
+    margin-bottom: 12px;
+  }
+
+  .section-title span { color: var(--rose); font-style: italic; }
+
+  .section-sub {
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 50px;
+  }
+
+  .details-cards {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .detail-card {
+    background: linear-gradient(135deg, #fff8f0, #fff0f5);
+    border: 2px solid rgba(212, 168, 67, 0.2);
+    border-radius: 24px;
+    padding: 36px 28px;
+    flex: 1;
+    min-width: 200px;
+    max-width: 240px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .detail-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--rose), var(--gold));
+    transform: scaleX(0);
+    transition: transform 0.3s;
+  }
+
+  .detail-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(232,97,122,0.15); }
+  .detail-card:hover::after { transform: scaleX(1); }
+
+  .detail-icon { font-size: 40px; margin-bottom: 16px; display: block; }
+  .detail-card h3 { font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 8px; }
+  .detail-card p { font-size: 14px; color: #666; line-height: 1.6; }
+
+  /* ===== RSVP ===== */
+  .rsvp-section {
+    padding: 80px 20px;
+    background: linear-gradient(160deg, #fff5e6 0%, #ffd6e0 100%);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .rsvp-section::before {
+    content: '💌';
+    position: absolute;
+    font-size: 200px;
+    opacity: 0.06;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .rsvp-form {
+    max-width: 480px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .rsvp-form input,
+  .rsvp-form select {
+    width: 100%;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    border: 2px solid rgba(212,168,67,0.3);
+    border-radius: 50px;
+    background: rgba(255,255,255,0.8);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    color: var(--deep);
+    outline: none;
+    transition: border-color 0.3s;
+    appearance: none;
+  }
+
+  .rsvp-form input:focus,
+  .rsvp-form select:focus {
+    border-color: var(--rose);
+    background: #fff;
+  }
+
+  .rsvp-btn {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, var(--rose), #c94a60);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 8px 24px rgba(232,97,122,0.3);
+  }
+
+  .rsvp-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(232,97,122,0.4);
+  }
+
+  .rsvp-success {
+    display: none;
+    padding: 32px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 24px;
+    border: 2px solid var(--gold);
+  }
+
+  .rsvp-success .big-emoji { font-size: 56px; display: block; margin-bottom: 16px; }
+  .rsvp-success h3 { font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 8px; color: var(--deep); }
+  .rsvp-success p { color: #666; font-size: 14px; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--deep);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 32px 20px;
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+
+  footer span { color: var(--rose); }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="confetti" id="confetti"></div>
+  <div class="deco-flower tl">🌸</div>
+  <div class="deco-flower br">🌺</div>
+  <div class="deco-flower tr">🌼</div>
+  <div class="deco-flower bl">🌷</div>
+
+  <p class="hero-badge">🎊 Вы приглашены на свадьбу 🎊</p>
+  <h1 class="hero-names">
+    Аман
+    <span class="ampersand">&amp;</span>
+    Рамина
+  </h1>
+  <div class="hero-divider"></div>
+  <p class="hero-date">09 · 08 · 2026</p>
+  <p class="hero-place">🏛 Grand Festival · г. Астана</p>
+  <div class="hero-scroll">↓</div>
+</section>
+
+<!-- COUNTDOWN -->
+<section class="countdown-section">
+  <p class="section-label">До торжества осталось</p>
+  <div class="countdown-grid">
+    <div class="countdown-block">
+      <span class="countdown-num" id="cd-days">--</span>
+      <span class="countdown-unit">Дней</span>
+    </div>
+    <div class="countdown-block">
+      <span class="countdown-num" id="cd-hours">--</span>
+      <span class="countdown-unit">Часов</span>
+    </div>
+    <div class="countdown-block">
+      <span class="countdown-num" id="cd-mins">--</span>
+      <span class="countdown-unit">Минут</span>
+    </div>
+    <div class="countdown-block">
+      <span class="countdown-num" id="cd-secs">--</span>
+      <span class="countdown-unit">Секунд</span>
+    </div>
+  </div>
+</section>
+
+<!-- DETAILS -->
+<section class="details-section">
+  <p class="section-sub">Детали праздника</p>
+  <h2 class="section-title">Важная <span>информация</span></h2>
+  <div class="details-cards">
+    <div class="detail-card">
+      <span class="detail-icon">📅</span>
+      <h3>Дата</h3>
+      <p>9 августа 2026 года<br>Воскресенье</p>
+    </div>
+    <div class="detail-card">
+      <span class="detail-icon">⏰</span>
+      <h3>Время</h3>
+      <p>Сбор гостей с 17:00<br>Начало в 18:00</p>
+    </div>
+    <div class="detail-card">
+      <span class="detail-icon">📍</span>
+      <h3>Место</h3>
+      <p>Grand Festival<br>г. Астана, Казахстан</p>
+    </div>
+  </div>
+</section>
+
+<!-- RSVP -->
+<section class="rsvp-section">
+  <p class="section-sub">Подтверждение</p>
+  <h2 class="section-title" style="margin-bottom:8px;">Вы <span>придёте?</span></h2>
+  <p style="color:#888; font-size:14px; margin-bottom:36px;">Пожалуйста, подтвердите своё присутствие до 1 июля 2026</p>
+
+  <div class="rsvp-form" id="rsvp-form">
+    <input type="text" id="rsvp-name" placeholder="Ваше имя и фамилия" />
+    <input type="text" id="rsvp-phone" placeholder="Номер телефона" />
+    <select id="rsvp-attend">
+      <option value="">Буду ли я присутствовать?</option>
+      <option value="yes">✅ Да, обязательно приду!</option>
+      <option value="no">😔 К сожалению, не смогу</option>
+      <option value="maybe">🤔 Постараюсь, уточню позже</option>
+    </select>
+    <select id="rsvp-guests">
+      <option value="">Количество гостей (включая вас)</option>
+      <option value="1">1 человек</option>
+      <option value="2">2 человека</option>
+      <option value="3">3 человека</option>
+      <option value="4">4 человека</option>
+    </select>
+    <button class="rsvp-btn" onclick="submitRSVP()">💌 Подтвердить присутствие</button>
+  </div>
+
+  <div class="rsvp-success" id="rsvp-success">
+    <span class="big-emoji">🎉</span>
+    <h3 id="success-msg">Спасибо!</h3>
+    <p>Мы рады, что вы будете с нами в этот особенный день.<br>До встречи 9 августа!</p>
+  </div>
+</section>
+
+<footer>
+  Сделано с <span>♥</span> для Аман &amp; Рамина · 09.08.2026
+</footer>
+
+<script>
+  // Confetti
+  const confettiColors = ['#E8617A','#D4A843','#F0C96A','#F5A0AE','#FF9F7F','#7EC8C8'];
+  const container = document.getElementById('confetti');
+  for (let i = 0; i < 35; i++) {
+    const el = document.createElement('span');
+    const size = Math.random() * 10 + 5;
+    el.style.cssText = `
+      left: ${Math.random()*100}%;
+      width: ${size}px;
+      height: ${size}px;
+      background: ${confettiColors[Math.floor(Math.random()*confettiColors.length)]};
+      border-radius: ${Math.random() > 0.5 ? '50%' : '2px'};
+      animation-duration: ${Math.random()*6+4}s;
+      animation-delay: ${Math.random()*5}s;
+      opacity: ${Math.random()*0.5+0.3};
+    `;
+    container.appendChild(el);
+  }
+
+  // Countdown
+  function updateCountdown() {
+    const target = new Date('2026-08-09T18:00:00');
+    const now = new Date();
+    const diff = target - now;
+    if (diff <= 0) {
+      document.getElementById('cd-days').textContent = '0';
+      document.getElementById('cd-hours').textContent = '0';
+      document.getElementById('cd-mins').textContent = '0';
+      document.getElementById('cd-secs').textContent = '0';
+      return;
+    }
+    document.getElementById('cd-days').textContent = String(Math.floor(diff/86400000)).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
+    document.getElementById('cd-mins').textContent = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+    document.getElementById('cd-secs').textContent = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // RSVP
+  function submitRSVP() {
+    const name = document.getElementById('rsvp-name').value.trim();
+    const attend = document.getElementById('rsvp-attend').value;
+    if (!name || !attend) {
+      alert('Пожалуйста, заполните имя и выберите вариант присутствия.');
+      return;
+    }
+    document.getElementById('rsvp-form').style.display = 'none';
+    const success = document.getElementById('rsvp-success');
+    success.style.display = 'block';
+    const msg = attend === 'yes' ? `Ура, ${name}! Ждём вас! 🎊` :
+                attend === 'no'  ? `Жаль, ${name}. Будем скучать! 💛` :
+                                   `Хорошо, ${name}! Сообщите нам позже 😊`;
+    document.getElementById('success-msg').textContent = msg;
+  }
+</script>
+</body>
+</html>
