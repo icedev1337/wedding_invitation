@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=390, user-scalable=no"/>
+  <meta name="format-detection" content="telephone=no"/>
+  <meta name="description" content="свадебное приглашение"/>
+  <meta property="og:title" content="Амангельди &amp; Рамина"/>
+  <meta property="og:description" content="свадебное приглашение"/>
+  <meta property="og:image" content="https://static.tildacdn.pro/tild3632-6534-4434-a535-363661636535/IMG_2682.PNG"/>
+  <meta property="og:type" content="website"/>
+  <title>Амангельди &amp; Рамина</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #181412;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      max-width: 390px;
+      margin: 0 auto;
+      overflow-x: hidden;
+    }
+
+    /* ─── SCROLL HINT SCREEN ─── */
+    #screen-hint {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #181412;
+      flex-direction: column;
+      transition: opacity .5s ease;
+      max-width: 390px;
+      margin: 0 auto;
+      left: 50%;
+      transform: translateX(-50%);
+      right: auto;
+    }
+    #screen-hint.hide { opacity: 0; pointer-events: none; }
+    .hint-swipe-text {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.15em;
+      color: #c8a97e;
+      text-transform: lowercase;
+      margin-top: 18px;
+    }
+    .hint-arrow {
+      width: 2px;
+      height: 50px;
+      background: linear-gradient(to bottom, transparent, #c8a97e);
+      margin-top: 10px;
+      animation: arrowPulse 1.5s ease-in-out infinite;
+    }
+    @keyframes arrowPulse {
+      0%   { opacity: 0; transform: scaleY(.5) translateY(-10px); }
+      50%  { opacity: 1; transform: scaleY(1) translateY(0); }
+      100% { opacity: 0; transform: scaleY(.5) translateY(10px); }
+    }
+
+    /* ─── BLOCK 1: BG PATTERN + NAMES HERO ─── */
+    #block1 {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow: hidden;
+      background: #181412;
+    }
+    .bg-pattern {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      width: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .bg-pattern img { width: 100%; display: block; }
+
+    .block1-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 20px 40px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .flower-divider {
+      width: 180px;
+      margin: 10px auto;
+      display: block;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      font-weight: 400;
+      color: #c8a97e;
+      letter-spacing: 0.05em;
+      margin: 18px 0 6px;
+      line-height: 1.2;
+    }
+    .hero-ampersand {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 28px;
+      color: #c8a97e;
+      margin: 0 8px;
+    }
+
+    /* music player row */
+    .music-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 22px 0 0;
+      background: rgba(200,169,126,0.1);
+      border: 1px solid rgba(200,169,126,0.25);
+      border-radius: 40px;
+      padding: 8px 16px 8px 10px;
+      cursor: pointer;
+      width: 240px;
+    }
+    .music-play-btn {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: #c8a97e;
+      border: none;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .music-play-btn .icon-play  { display: block; }
+    .music-play-btn .icon-pause { display: none;  }
+    .music-play-btn.playing .icon-play  { display: none;  }
+    .music-play-btn.playing .icon-pause { display: block; }
+    .music-label {
+      font-size: 11px;
+      color: #c8a97e;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: .8;
+    }
+    .music-bars {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+    .music-bars span {
+      display: block;
+      width: 3px;
+      background: #c8a97e;
+      border-radius: 2px;
+      opacity: .5;
+    }
+    .music-bars span:nth-child(1){ height:8px;  animation: bar 1s .0s ease-in-out infinite alternate; }
+    .music-bars span:nth-child(2){ height:14px; animation: bar 1s .1s ease-in-out infinite alternate; }
+    .music-bars span:nth-child(3){ height:10px; animation: bar 1s .2s ease-in-out infinite alternate; }
+    .music-bars span:nth-child(4){ height:16px; animation: bar 1s .15s ease-in-out infinite alternate; }
+    .music-bars span:nth-child(5){ height:7px;  animation: bar 1s .05s ease-in-out infinite alternate; }
+    .music-bars.paused span { animation-play-state: paused; opacity: .2; }
+    @keyframes bar { from{ transform: scaleY(.4); } to{ transform: scaleY(1); } }
+
+    /* ─── BLOCK 2: COUPLE PHOTOS ─── */
+    #block2 {
+      position: relative;
+      background: #181412;
+    }
+    .couple-photos-wrap {
+      width: 100%;
+    }
+    .couple-photos-wrap img { width: 100%; display: block; }
+
+    /* ─── BLOCK 3: INVITATION TEXT ─── */
+    #block3 {
+      background: #181412;
+      text-align: center;
+      padding: 40px 28px;
+    }
+    .ornament-divider {
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto 28px;
+      display: block;
+    }
+    .invite-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      color: #c8a97e;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+      line-height: 1.6;
+    }
+    .invite-text {
+      font-size: 14px;
+      line-height: 2;
+      color: #e8ddd0;
+      font-weight: 300;
+      margin-bottom: 6px;
+    }
+    .invite-name-big {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 400;
+      color: #c8a97e;
+      font-style: italic;
+      display: block;
+      margin: 8px 0;
+    }
+    .invite-and {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      color: #c8a97e;
+      font-style: italic;
+      margin: 4px 0;
+      display: block;
+    }
+
+    /* ─── BLOCK 4: WAVY PHOTO BLOCK ─── */
+    #block4 {
+      position: relative;
+      background: #181412;
+    }
+    #block4 img { width: 100%; display: block; }
+
+    /* ─── BLOCK 5: COUNTDOWN ─── */
+    #block5 {
+      background: #181412;
+      text-align: center;
+      padding: 40px 20px;
+      position: relative;
+    }
+    .countdown-label-top {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      letter-spacing: 0.1em;
+      color: #c8a97e;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+    .countdown-row {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 0;
+    }
+    .cd-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 72px;
+    }
+    .cd-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 64px;
+      font-weight: 300;
+      color: #c8a97e;
+      line-height: 1;
+    }
+    .cd-lbl {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #c8a97e;
+      opacity: .6;
+      margin-top: 4px;
+    }
+    .cd-colon {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      color: #c8a97e;
+      opacity: .4;
+      line-height: 1;
+      padding: 0 2px;
+      align-self: flex-start;
+      padding-top: 6px;
+    }
+    .countdown-svg-deco {
+      width: 100%;
+      max-width: 340px;
+      margin: 20px auto 0;
+      display: block;
+    }
+
+    /* ─── BLOCK 6: DATE ─── */
+    #block6 {
+      background: #181412;
+      text-align: center;
+      padding: 30px 20px 40px;
+    }
+    .date-label {
+      font-size: 12px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #c8a97e;
+      margin-bottom: 16px;
+    }
+    .date-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .date-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 80px;
+      font-weight: 300;
+      color: #c8a97e;
+      line-height: 1;
+    }
+    .date-dot {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 40px;
+      color: #c8a97e;
+      opacity: .4;
+      line-height: 1;
+    }
+    .date-year {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      font-weight: 300;
+      color: #c8a97e;
+      opacity: .7;
+    }
+
+    /* ─── BLOCK 7: SCHEDULE ─── */
+    #block7 {
+      background: #181412;
+      padding: 10px 28px 40px;
+    }
+    .schedule-title {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #c8a97e;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    .sched-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 0;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(200,169,126,.15);
+    }
+    .sched-item:last-child { border-bottom: none; }
+    .sched-time-big {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 38px;
+      font-weight: 300;
+      color: #c8a97e;
+      line-height: 1.1;
+    }
+    .sched-desc-text {
+      font-size: 13px;
+      color: #e8ddd0;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      margin-top: 4px;
+    }
+    .sched-start-note {
+      font-size: 12px;
+      color: #c8a97e;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 16px;
+      text-align: center;
+      opacity: .7;
+    }
+
+    /* ─── BLOCK 8: VENUE ─── */
+    #block8 {
+      background: #181412;
+      padding: 20px 28px 40px;
+      text-align: center;
+    }
+    .venue-note {
+      font-size: 13px;
+      line-height: 1.9;
+      color: #e8ddd0;
+      font-weight: 300;
+      margin-bottom: 18px;
+    }
+    .venue-restaurant {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-style: italic;
+      color: #c8a97e;
+      margin-bottom: 4px;
+    }
+    .venue-type {
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #c8a97e;
+      opacity: .6;
+      margin-bottom: 10px;
+    }
+    .venue-address-text {
+      font-size: 14px;
+      color: #e8ddd0;
+      font-weight: 300;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    .venue-address-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #c8a97e;
+      opacity: .7;
+      margin-bottom: 6px;
+    }
+    .map-img-wrap {
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 16px 0;
+      border: 1px solid rgba(200,169,126,.2);
+    }
+    .map-img-wrap img { width: 100%; display: block; }
+    .map-link-btn {
+      display: inline-block;
+      background: transparent;
+      border: 1px solid #c8a97e;
+      color: #c8a97e;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 12px 28px;
+      border-radius: 40px;
+      margin-top: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      transition: background .2s, color .2s;
+    }
+    .map-link-btn:active { background: #c8a97e; color: #181412; }
+
+    /* ─── BLOCK 9: DRESS CODE ─── */
+    #block9 {
+      background: #181412;
+      padding: 20px 28px 40px;
+      text-align: center;
+    }
+    .dresscode-label {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #c8a97e;
+      margin-bottom: 16px;
+    }
+    .dresscode-text {
+      font-size: 14px;
+      line-height: 2;
+      color: #e8ddd0;
+      font-weight: 300;
+    }
+
+    /* ─── BLOCK 10: HOSTS ─── */
+    #block10 {
+      background: #181412;
+      padding: 10px 28px 40px;
+      text-align: center;
+    }
+    .hosts-label {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #c8a97e;
+      margin-bottom: 12px;
+    }
+    .hosts-names {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 400;
+      color: #c8a97e;
+    }
+
+    /* ─── BLOCK 11: CLOSING ─── */
+    #block11 {
+      background: #181412;
+      text-align: center;
+      padding: 30px 28px 50px;
+    }
+    .closing-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 300;
+      font-style: italic;
+      color: #c8a97e;
+      line-height: 1.6;
+    }
+
+    /* hidden audio */
+    audio { display: none; }
+
+    /* fade in */
+    .fadein { opacity: 0; transform: translateY(24px); transition: opacity .65s ease, transform .65s ease; }
+    .fadein.vis { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- SCROLL HINT -->
+<div id="screen-hint">
+  <p class="hint-swipe-text">прокрутите вверх</p>
+  <div class="hint-arrow"></div>
+</div>
+
+<audio id="bgAudio" loop>
+  <source src="https://dl.dropbox.com/scl/fi/dn1pnoibh5tgo4iolrb12/Temirlan_Yernat_-_ALEM_73448912.mp3?rlkey=kon43mg3jjn9hnku9ucuxc4tc&st=74p7q19w&dl=0" type="audio/mpeg"/>
+</audio>
+
+<!-- ══════════════════════════════════
+     BLOCK 1 — HERO
+════════════════════════════════════ -->
+<div id="block1">
+  <!-- decorative background pattern -->
+  <div class="bg-pattern">
+    <img src="https://thb.tildacdn.pro/tild3738-6666-4438-b037-646634363461/__.png"
+         alt="" loading="lazy"/>
+  </div>
+
+  <div class="block1-inner">
+    <!-- flower divider top -->
+    <img class="flower-divider fadein"
+         src="https://thb.tildacdn.pro/tild3865-3262-4537-b838-626632623435/5c6678e3d907d168f048.png"
+         alt=""/>
+
+    <!-- names -->
+    <h1 class="hero-title fadein">
+      Амангельди<span class="hero-ampersand">&amp;</span>Рамина
+    </h1>
+
+    <!-- flower divider bottom -->
+    <img class="flower-divider fadein"
+         src="https://thb.tildacdn.pro/tild3865-3262-4537-b838-626632623435/5c6678e3d907d168f048.png"
+         alt=""/>
+
+    <!-- music player -->
+    <div class="music-row fadein" onclick="toggleMusic()">
+      <button class="music-play-btn" id="musicBtn" aria-label="Воспроизвести">
+        <!-- play icon -->
+        <svg class="icon-play" width="14" height="16" viewBox="0 0 14 16" fill="#181412">
+          <polygon points="0,0 14,8 0,16"/>
+        </svg>
+        <!-- pause icon -->
+        <svg class="icon-pause" width="12" height="14" viewBox="0 0 12 14" fill="#181412">
+          <rect x="0" y="0" width="4" height="14" rx="1"/>
+          <rect x="8" y="0" width="4" height="14" rx="1"/>
+        </svg>
+      </button>
+      <span class="music-label">Музыка</span>
+      <div class="music-bars paused" id="musicBars">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     BLOCK 2 — COUPLE PHOTOS
+════════════════════════════════════ -->
+<div id="block2" class="couple-photos-wrap">
+  <img src="https://thb.tildacdn.pro/tild6565-3366-4936-b838-613932643333/photo.png"
+       alt="Амангельди и Рамина" loading="lazy"/>
+  <img src="https://thb.tildacdn.pro/tild3761-3535-4230-a663-636134303139/noroot.png"
+       alt="Амангельди и Рамина" loading="lazy"/>
+</div>
+
+<!-- ══════════════════════════════════
+     BLOCK 3 — INVITATION TEXT
+════════════════════════════════════ -->
+<div id="block3">
+  <img class="ornament-divider fadein"
+       src="https://thb.tildacdn.pro/tild6335-6531-4566-b761-343639333765/___21.png"
+       alt=""/>
+
+  <p class="invite-heading fadein">
+    Уважаемые родственники,<br>
+    братья и близкие,<br>
+    дядя с тётей, племянники,<br>
+    сваты и родня,<br>
+    друзья и коллеги!
+  </p>
+
+  <p class="invite-text fadein">Приглашаем вас, нашего сына</p>
+  <span class="invite-name-big fadein">Амангельди</span>
+
+  <p class="invite-text fadein" style="margin-top:10px;">
+    и нашу невестку на свадебный торжественный<br>
+    белый дастархан — стать нашим дорогим гостем!
+  </p>
+
+  <span class="invite-and fadein">&amp;</span>
+  <span class="invite-name-big fadein">Рамина</span>
+
+  <img class="ornament-divider fadein" style="margin-top:28px;"
+       src="https://thb.tildacdn.pro/tild6335-6531-4566-b761-343639333765/___21.png"
+       alt=""/>
+</div>
+
+<!-- ══════════════════════════════════
+     BLOCK 4 — WHATSAPP PHOTO / WIDE PHOTO
+════════════════════════════════════ -->
+<div id="block4">
+  <img src="https://thb.tildacdn.pro/tild3764-3666-4637-b035-333737373837/_WhatsApp_2024-11-10.jpg"
+       alt="Амангельди и Рамина" loading="lazy" style="width:100%;display:block;"/>
+  <img src="https://thb.tildacdn.pro/tild3436-3265-4361-b562-303635633431/c442aec568ef40196e80.png"
+       alt="" loading="lazy" style="width:100%;display:block;"/>
+</div>
+
+<!-- ══════════════════════════════════
+     BLOCK 5 — COUNTDOWN
+════════════════════════════════════ -->
+<div id="block5">
+  <p class="countdown-label-top fadein">До торжества:</p>
+  <div class="countdown-row fadein">
+    <div class="cd-unit">
+      <span class="cd-num" id="cdDays">--</span>
+      <span class="cd-lbl">дней</span>
+    </div>
+    <div class="cd-colon">:</div>
+    <div class="cd-unit">
+      <span class="cd-num" id="cdHours">--</span>
+      <span class="cd-lbl">часов</span>
+    </div>
+    <div class="cd-colon">:</div>
+    <div class="cd-unit">
+      <span class="cd-num" id="cdMins">--</span>
+      <span class="cd-lbl">минут</span>
+    </div>
+  </div>
+  <img class="countdown-svg-deco fadein"
+       src="https://static.tildacdn.pro/tild3539-3466-4330-b337-373566303533/1.svg"
+       alt="" loading="lazy"/>
+  <img class="countdown-svg-deco fadein"
+       src="https://static.tildacdn.pro/tild6630-3837-4138-b833-623935326437/1.svg"
+       alt="" loading="lazy"/>
+</div>
+
+<!-- ══════════════════════════════════
+     BLOCK 6 — DATE
+════════════════════════════════════ -->
+<div id="block6">
+  <p class="date-label fadein">Торжество состоится:</p>
+  <div class="date-row fadein">
+    <span class="date-num">09</span>
+    <span class="date-dot">·</span>
+    <span class="date-num">08</span>
+    <span class="date-dot">·</span>
+    <span class="date-year">2026</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     BLOCK 7 — SCHEDULE
+════════════════════════════════════ -->
+<div id="block7">
+  <img class="ornament-divider fadein"
+       src="https://thb.tildacdn.pro/tild6335-6531-4566-b761-343639333765/___21.png"
+       alt=""/>
+  <p class="schedule-title fadein">Программа торжества</p>
+
+  <div class="sched-item fadein">
+    <span class="sched-time-big">17:30</span>
+    <span class="sched-desc-text">начало торжества</span>
+  </div>
+  <div class="sched-item fadein">
+    <span class="sched-time-big">17:00</span>
+    <span class="sched-desc-text">церемония беташар</span>
+  </div>
+  <div class="sched-item fadein">
+    <span class="sched-time-big">16:00</span>
+    <span class="sched-desc-text">сбор гостей</span>
+  </div>
+
+  <p class="sched-start-note fadein">начало в 16:00</p>
+  <img class="ornament-divider fadein" style="margin-top:28px;"
+       src="https://thb.tildacdn.pro/tild6335-6531-4566-b761-343639333765/___21.png"
+       alt=""/>
+</div>
+
+<!-- ══════════════════════════════════
+     BLOCK 8 — VENUE / MAP
+════════════════════════════════════ -->
+<div id="block8">
+  <!-- WhatsApp photo again as section bg -->
+  <img src="https://thb.tildacdn.pro/tild3764-3666-4637-b035-333737373837/_WhatsApp_2024-11-10.jpg"
+       alt="" loading="lazy" style="width:100%;display:block;margin-bottom:28px;"/>
+
+  <img src="https://static.tildacdn.pro/tild3934-3761-4364-a165-363331663061/1.svg"
+       alt="" loading="lazy" style="width:100%;max-width:340px;margin:0 auto 20px;display:block;"/>
+
+  <img class="ornament-divider fadein"
+       src="https://thb.tildacdn.pro/tild3436-3265-4361-b562-303635633431/c442aec568ef40196e80.png"
+       alt=""/>
+
+  <img class="ornament-divider fadein"
+       src="https://thb.tildacdn.pro/tild6335-6531-4566-b761-343639333765/___21.png"
+       alt=""/>
+
+  <p class="venue-note fadein">
+    Для вашего удобства предлагаем<br>
+    воспользоваться картой, указанной ниже
+  </p>
+
+  <!-- map image placeholder / actual map image -->
+  <div class="map-img-wrap fadein">
+    <img src="https://thb.tildacdn.pro/tild6135-3333-4763-a138-633739346665/____.png"
+         alt="Карта" loading="lazy"/>
+  </div>
+
+  <a href="https://2gis.kz/astana/firm/70000001042727082" target="_blank" rel="noopener"
+     class="map-link-btn fadein">Перейти на карту 2GIS</a>
+
+  <p class="venue-address-label fadein" style="margin-top:28px;">Наш адрес:</p>
+  <p class="venue-address-text fadein">
+    г. Астана<br>
+    ул. Достык, 4
+  </p>
+
+  <p class="venue-restaurant fadein">«Grand Festival»</p>
+  <p class="venue-type fadein">ресторан</p>
+
+  <img class="ornament-divider fadein"
+       src="https://thb.tildacdn.pro/tild6335-6531-4566-b761-343639333765/___21.png"
+       alt=""/>
+</div>
+
+<!-- ══════════════════════════════════
+     BLOCK 9 — DRESS CODE
+════════════════════════════════════ -->
+<div id="block9">
+  <p class="dresscode-label fadein">Дресс-код</p>
+  <p class="dresscode-text fadein">
+    Просим выбрать одежду по погоде<br>
+    и прийти в приподнятом настроении.<br><br>
+    Для нас самое важное — ваше присутствие,<br>
+    искренние улыбки и уютная атмосфера праздника.
+  </p>
+
+  <img class="ornament-divider fadein" style="margin-top:28px;"
+       src="https://thb.tildacdn.pro/tild6335-6531-4566-b761-343639333765/___21.png"
+       alt=""/>
+</div>
+
+<!-- ══════════════════════════════════
+     BLOCK 10 — HOSTS
+════════════════════════════════════ -->
+<div id="block10">
+  <p class="hosts-label fadein">Хозяева торжества</p>
+  <p class="hosts-names fadein">Канат &amp; Дамира</p>
+
+  <img class="ornament-divider fadein" style="margin-top:28px;"
+       src="https://thb.tildacdn.pro/tild6335-6531-4566-b761-343639333765/___21.png"
+       alt=""/>
+</div>
+
+<!-- ══════════════════════════════════
+     BLOCK 11 — CLOSING
+════════════════════════════════════ -->
+<div id="block11">
+  <p class="closing-text fadein">
+    Приходите,<br>
+    станьте дорогими<br>
+    гостями нашего торжества!
+  </p>
+  <img class="ornament-divider fadein" style="margin-top:32px;"
+       src="https://thb.tildacdn.pro/tild6335-6531-4566-b761-343639333765/___21.png"
+       alt=""/>
+</div>
+
+<script>
+// ── SCROLL HINT ──
+(function(){
+  var hint = document.getElementById('screen-hint');
+  function remove(){ hint.classList.add('hide'); setTimeout(function(){ hint.remove(); }, 600); }
+  hint.addEventListener('click', remove);
+  window.addEventListener('scroll', function f(){ remove(); window.removeEventListener('scroll', f); }, { passive: true });
+  setTimeout(remove, 4000);
+})();
+
+// ── MUSIC ──
+var audio = document.getElementById('bgAudio');
+var btn   = document.getElementById('musicBtn');
+var bars  = document.getElementById('musicBars');
+function toggleMusic(){
+  if(audio.paused){
+    audio.play().catch(function(){});
+    btn.classList.add('playing');
+    bars.classList.remove('paused');
+  } else {
+    audio.pause();
+    btn.classList.remove('playing');
+    bars.classList.add('paused');
+  }
+}
+
+// ── COUNTDOWN ──
+function updateCountdown(){
+  var target = new Date('2026-08-09T16:00:00+06:00');
+  var now    = new Date();
+  var diff   = target - now;
+  if(diff < 0) diff = 0;
+  var d = Math.floor(diff / 864e5);
+  var h = Math.floor((diff % 864e5) / 36e5);
+  var m = Math.floor((diff % 36e5)  / 6e4);
+  document.getElementById('cdDays').textContent  = d;
+  document.getElementById('cdHours').textContent = String(h).padStart(2,'0');
+  document.getElementById('cdMins').textContent  = String(m).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown, 30000);
+
+// ── FADE IN ──
+var io = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){ e.target.classList.add('vis'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fadein').forEach(function(el){ io.observe(el); });
+</script>
+</body>
+</html>
